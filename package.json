@@ -24,6 +24,8 @@
   "private": true,
   "homepage": "https://github.com/anoff/cryptobooks#readme",
   "dependencies": {
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   },
   "devDependencies": {
     "ava": "^0.19.1",
