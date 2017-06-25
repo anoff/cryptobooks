@@ -1,0 +1,32 @@
+{
+  "name": "cryptobooks",
+  "version": "0.0.1",
+  "description": "cryptocurrency book keeping",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anoff/cryptobooks.git"
+  },
+  "keywords": [
+    "crypto",
+    "bitcoin",
+    "ethereum",
+    "prices"
+  ],
+  "author": "Andreas Offenhaeuser <http://anoff.io>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/anoff/cryptobooks/issues"
+  },
+  "private": true,
+  "homepage": "https://github.com/anoff/cryptobooks#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "standard": "^10.0.2"
+  }
+}
