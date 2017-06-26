@@ -9,7 +9,7 @@
     {
       "type": "table",
       "name": "tableBinding",
-      "tableName": "outTable",
+      "tableName": "prices",
       "connection": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
       "direction": "out"
     }
