@@ -13,7 +13,6 @@ module.exports = function (context, timer) {
       Object.keys(data).forEach(key => {
         entry[key] = data[key]
       })
-      context.log(entry)
       context.bindings.tableBinding.push(entry)
       context.done(null, data)
     })

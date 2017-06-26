@@ -2,10 +2,11 @@
 # Set up the azure space for collector function
 # Prereqs: 
 #   1. have `azurecli` python package installed (az binary)
+set -e
 
 RESOURCE_GROUP="cryptobooks1"
-STORAGE_NAME="oracle"
-FUNCTION_APP="collector"
+STORAGE_NAME="cb1oracle"
+FUNCTION_APP="cb1collector"
 
 az group create --name "$RESOURCE_GROUP" --location westeurope
 
