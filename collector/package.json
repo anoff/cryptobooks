@@ -1,0 +1,21 @@
+{
+  "name": "cryptobooks-collector",
+  "version": "0.0.1",
+  "description": "collect prices",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anoff/cryptobooks.git"
+  },
+  "author": "Andreas Offenhaeuser <http://anoff.io>",
+  "license": "GPL-3.0",
+  "private": true,
+  "homepage": "https://github.com/anoff/cryptobooks#readme",
+  "dependencies": {
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  }
+}
