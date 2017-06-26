@@ -10,9 +10,10 @@ Prices for various crypto currencies are collected every minute via azure functi
 
 * [x] Playground function and table storage
 * [x] Deploy functions via github/infra-as-code
-* [ ] re-write storage [table design](https://docs.microsoft.com/en-us/azure/storage/storage-table-design-guide) to have `partitionKey = coin` & `rowKey = date`
-* [ ] figure out how to add old data
+* [x] re-write storage [table design](https://docs.microsoft.com/en-us/azure/storage/storage-table-design-guide) to have `partitionKey = coin` & `rowKey = date`
+* [x] figure out how to add old data
     * maybe revise aggregates depending on availabily of historic data
+    * ➡️ use day [day history API](https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=1000), see [spec](https://www.cryptocompare.com/api/#-api-data-histoday-), needs one query per `coin/currency` pair but should be executable within rate limits as it allows 2000 days at once
 
 ### aggregating prices
 
