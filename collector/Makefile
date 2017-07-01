@@ -1,6 +1,6 @@
 RESOURCE_GROUP="cryptobooks1"
 STORAGE_NAME="cb1oracle"
-FUNCTION_APP="cb1collector"
+FUNCTION_APP="cryptobooks1"
 
 setup:
 	az group create --name "$(RESOURCE_GROUP)" --location westeurope

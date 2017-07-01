@@ -1,7 +1,7 @@
 {
-  "name": "cryptobooks-collector",
+  "name": "cryptobooks-users",
   "version": "0.0.1",
-  "description": "collect prices",
+  "description": "REST IF for users/assets",
   "main": "index.js",
   "scripts": {
     "test": "standard"
@@ -15,8 +15,6 @@
   "private": true,
   "homepage": "https://github.com/anoff/cryptobooks#readme",
   "dependencies": {
-    "azure-storage": "^2.2.0",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1"
+    "azure-storage": "^2.2.0"
   }
 }

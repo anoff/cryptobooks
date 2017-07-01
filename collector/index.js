@@ -1,9 +1,11 @@
 const request = require('request-promise')
+const azure = require('azure-storage')
+const TABLENAME = 'prices'
 
 module.exports = function (context, timer) {
   const timestamp = new Date()
   const url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,SC,LTC,ETC,XMR,XRP&tsyms=BTC,EUR,USD'
-  context.bindings.tableBinding = []
+  const tableService = azure.createTableService(process.env.AzureWebJobsStorage)
   request(url)
     .then(data => {
       data = JSON.parse(data)
@@ -16,9 +18,14 @@ module.exports = function (context, timer) {
         Object.keys(data[coin]).forEach(curr => {
           entry[curr] = data[coin][curr]
         })
-        context.bindings.tableBinding.push(entry)
+        tableService.insertEntity(TABLENAME, entry, function (error, result, response) {
+          if (!error) {
+            context.done(null, data)
+          } else {
+            context.done(error)
+          }
+        })
       })
-      context.done(null, data)
     })
     .catch(e => context.done(e))
 }
