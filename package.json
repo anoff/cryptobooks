@@ -4,7 +4,8 @@
   "description": "cryptocurrency book keeping",
   "main": "index.js",
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "fix-style": "standard --fix"
   },
   "repository": {
     "type": "git",

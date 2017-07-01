@@ -80,12 +80,27 @@ module.exports = function (context, req) {
         send({status: 404, body: {msg: 'Username does not exist. Use POST to create new'}})
       } else {
         if (isAuth(req, dbEntry, context)) {
-            // TODO check body size/type
+          // TODO check body size/type
           dbEntry.assets = req.body
           dbEntry.timeUpdated = new Date()
           tableService.replaceEntity(TABLENAME, dbEntry, function (error, result, response) {
             if (!error) {
               send('Assets updated')
+            } else {
+              send({status: 400, body: {msg: error}})
+            }
+          })
+        }
+      }
+      break
+    case 'DELETE':
+      if (!dbEntry) {
+        send({status: 404, body: {msg: 'Username does not exist'}})
+      } else {
+        if (isAuth(req, dbEntry, context)) {
+          tableService.deleteEntity(TABLENAME, dbEntry, function (error, result, response) {
+            if (!error) {
+              send('User deleted')
             } else {
               send({status: 400, body: {msg: error}})
             }
