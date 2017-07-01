@@ -14,7 +14,7 @@
 - 
 ## Prices
 
-`TODO`
+**TODO**
 
 ## User assets
 
@@ -26,18 +26,16 @@ All resources need to be `SSL` encrypted.
 
 ### Create new user account
 
-`method:` POST
+**method:** `POST`
 
-`path:` /user
-
-`headers`
+**headers**
 
 |name|description|example value|
 |---|---|---|
 |access-key|the users access key|2f234650e60d83 (weird hash)|
 
 
-`payload`
+**payload**
 
 ```json
 {
@@ -46,21 +44,19 @@ All resources need to be `SSL` encrypted.
 }
 ```
 
-`response:` Classic HTTP Status Codes `200` (OK) and `400` (Error) for now
+**response:** Classic HTTP Status Codes **200** (OK) and **400** (Error) for now
 
 ### Update a users assets
 
-`method:` PUT
+**method:** `PUT`
 
-`path:` /user/\<userid\>
-
-`headers`
+**headers**
 
 |name|description|example value|
 |---|---|---|
 |access-key|the users access key|2f234650e60d83 (weird hash)|
 
-`payload`
+**payload**
 
 ```json
 {
@@ -68,32 +64,36 @@ All resources need to be `SSL` encrypted.
 }
 ```
 
-`response:` Classic HTTP Status Codes `200` (OK) and `400` (Error) for now
+**response:** Classic HTTP Status Codes **200** (OK) and **400** (Error) for now
 
 ### Delete a user
 
-`method:` DELETE
+**method:** `DELETE`
 
-`path:` /user/\<userid\>
-
-`headers`
+**headers**
 
 |name|description|example value|
 |---|---|---|
 |access-key|the users access key|2f234650e60d83 (weird hash)|
 
-`response:` Classic HTTP Status Codes `200` (OK) and `400` (Error) for now
+**response:** Classic HTTP Status Codes **200** (OK) and **400** (Error) for now
 
 ### Retrieve a users assets
 
-`method:` GET
+**method:** GET
 
-`path:` /user/\<userid\>
+**path:** /user/\<userid\>
 
-`headers`
+**headers**
 
 |name|description|example value|
 |---|---|---|
 |access-key|the users access key|2f234650e60d83 (weird hash)|
 
-`response:` Classic HTTP Status Codes `200` (OK) and `400` (Error) for now
+**response:** Classic HTTP Status Codes **200** (OK) and **400** (Error)
+
+```json
+{
+    "assets": "encrypted JSON"
+}
+```
