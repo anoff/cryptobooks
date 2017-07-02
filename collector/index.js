@@ -13,19 +13,19 @@ module.exports = function (context, timer) {
         const entry = {
           PartitionKey: coin,
           RowKey: timestamp.valueOf(),
-          timeRecorded: new Date()
+          timeRecorded: timestamp
         }
         Object.keys(data[coin]).forEach(curr => {
           entry[curr] = data[coin][curr]
         })
         tableService.insertEntity(TABLENAME, entry, function (error, result, response) {
-          if (!error) {
-            context.done(null, data)
-          } else {
+          if (error) {
+            context.log(error)
             context.done(error)
           }
         })
       })
+      context.done(null, data)
     })
     .catch(e => context.done(e))
 }

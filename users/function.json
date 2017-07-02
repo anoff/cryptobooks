@@ -1,0 +1,33 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "{name}",
+      "methods": [
+        "get",
+        "post",
+        "delete",
+        "put"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "table",
+      "name": "usersIn",
+      "tableName": "users",
+      "partitionKey": "users",
+      "rowKey": "{name}",
+      "take": 10,
+      "connection": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}
