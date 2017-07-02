@@ -28,6 +28,8 @@ All resources need to be `SSL` encrypted.
 
 **method:** `POST`
 
+**path:** /user/`name` (_yes this is ugly_)
+
 **headers**
 
 |name|description|example value|
@@ -39,7 +41,6 @@ All resources need to be `SSL` encrypted.
 
 ```json
 {
-    "username": "newuser",
     "assets": "encrypted JSON"
 }
 ```
@@ -49,6 +50,8 @@ All resources need to be `SSL` encrypted.
 ### Update a users assets
 
 **method:** `PUT`
+
+**path:** /user/`name`
 
 **headers**
 
@@ -70,6 +73,8 @@ All resources need to be `SSL` encrypted.
 
 **method:** `DELETE`
 
+**path:** /user/`name`
+
 **headers**
 
 |name|description|example value|
@@ -82,7 +87,7 @@ All resources need to be `SSL` encrypted.
 
 **method:** GET
 
-**path:** /user/\<userid\>
+**path:** /user/`name`
 
 **headers**
 
