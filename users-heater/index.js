@@ -7,5 +7,10 @@ module.exports = function (context, myTimer) {
       context.log(`Done after ${new Date() - start} ms`)
       context.done()
     })
+    res.on('data', d => context.log(d.toString()))
+    res.on('err', e => context.log(e) && context.done(e))
   })
 }
+
+// use 'EXEC_LOCAL = TRUE node index.js' to run locally
+process.env.EXEC_LOCAL && module.exports({log: console.log, done: process.exit})
