@@ -12,7 +12,7 @@ module.exports = function (context, timer) {
       Object.keys(data).forEach(coin => {
         const entry = {
           PartitionKey: coin,
-          RowKey: timestamp.valueOf(),
+          RowKey: timestamp.toISOString(),
           timeRecorded: timestamp
         }
         Object.keys(data[coin]).forEach(curr => {
