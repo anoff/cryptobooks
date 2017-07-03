@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "get-history",
+      "methods": [
+        "post"
+      ]
+    },
+    {
+      "type": "table",
+      "name": "tableBinding",
+      "tableName": "prices",
+      "connection": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+      "direction": "out"
+    }
+  ],
+  "disabled": true
+}
