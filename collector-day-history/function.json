@@ -1,6 +1,16 @@
 {
   "bindings": [
     {
+      "authLevel": "admin",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "collect-history",
+      "methods": [
+        "post"
+      ]
+    },
+    {
       "type": "table",
       "name": "tableBinding",
       "tableName": "prices",
