@@ -1,16 +1,6 @@
 {
   "bindings": [
     {
-      "authLevel": "anonymous",
-      "type": "httpTrigger",
-      "direction": "in",
-      "name": "req",
-      "route": "get-history",
-      "methods": [
-        "post"
-      ]
-    },
-    {
       "type": "table",
       "name": "tableBinding",
       "tableName": "prices",
@@ -18,5 +8,5 @@
       "direction": "out"
     }
   ],
-  "disabled": true
+  "disabled": false
 }
