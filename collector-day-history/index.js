@@ -3,10 +3,10 @@ const request = require('request-promise')
 const fiats = ['EUR', 'BTC', 'USD']
 const coins = ['ETH']//, 'BTC', 'SC', 'LTC', 'ETC', 'XMR', 'XRP']
 
-module.exports = function (context, timer) {
+module.exports = function (context, req) {
   context.bindings.tableBinding = []
-  coins.forEach(coin => {
-    Promise.all(fiats.map(fiat => {
+  return Promise.all(coins.map(coin => {
+    return Promise.all(fiats.map(fiat => {
       const url = `https://min-api.cryptocompare.com/data/histoday?fsym=${coin}&tsym=${fiat}&limit=2000`
       return request(url)
       .then(res => {
@@ -43,9 +43,11 @@ module.exports = function (context, timer) {
       })
       .filter(e => e[fiats[0]] > 0) // filter elements where currency does not report valid price
       context.bindings.tableBinding = context.bindings.tableBinding.concat(entries)
+      return entries
     })
-  })
+  }))
+  .then(() => context.done())
 }
 
 // use 'EXEC_LOCAL = TRUE node index.js' to run locally
-process.env.EXEC_LOCAL && module.exports({log: console.log, done: process.exit})
+process.env.EXEC_LOCAL && module.exports({log: console.log, done: process.exit, bindings: {tableBinding: null}})
