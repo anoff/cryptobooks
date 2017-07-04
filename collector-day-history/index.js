@@ -4,7 +4,7 @@ const azure = require('azure-storage')
 const TABLENAME = 'prices'
 
 const fiats = ['EUR', 'BTC', 'USD']
-const coins = ['ETH', 'XMR']//, 'BTC', 'SC', 'LTC', 'ETC', 'XMR', 'XRP']
+const coins = ['BTC', 'ETH', 'BTC', 'SC', 'LTC', 'ETC', 'XMR', 'XRP']
 
 const tableService = azure.createTableService()
 Promise.all(coins.map(coin => {
@@ -61,7 +61,7 @@ Promise.all(coins.map(coin => {
   const tableBatches = []
   let last = null
   entries.forEach((entry, ix) => {
-    if (ix === 0 || tableBatches[0].size === 100 || entry.PartitionKey._ !== last.PartitionKey._) {
+    if (ix === 0 || tableBatches[0].size() === 100 || entry.PartitionKey._ !== last.PartitionKey._) {
       tableBatches.unshift(new azure.TableBatch())
     }
     tableBatches[0].insertEntity(entry)
