@@ -2,7 +2,7 @@
   "name": "cryptobooks-collector",
   "version": "0.0.1",
   "description": "collect prices",
-  "main": "index.js",
+  "main": "bin/collector",
   "scripts": {
     "test": "standard"
   },
@@ -16,6 +16,7 @@
   "homepage": "https://github.com/anoff/cryptobooks#readme",
   "dependencies": {
     "azure-storage": "^2.2.0",
+    "es6-promise-pool": "^2.4.6",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   }
