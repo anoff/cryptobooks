@@ -1,0 +1,2 @@
+[config]
+SCM_USE_FUNCPACK = 1
