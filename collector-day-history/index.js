@@ -1,10 +1,13 @@
 const request = require('request-promise')
+const azure = require('azure-storage')
+const TABLENAME = 'prices'
 
 const fiats = ['EUR', 'BTC', 'USD']
 const coins = ['ETH']//, 'BTC', 'SC', 'LTC', 'ETC', 'XMR', 'XRP']
 
 module.exports = function (context, req) {
-  context.bindings.tableBinding = []
+  const tableService = azure.createTableService(process.env.AzureWebJobsStorage)
+  //const tableService = {insertEntity: (a,b,c) => c(null, 'yay')}
   return Promise.all(coins.map(coin => {
     return Promise.all(fiats.map(fiat => {
       const url = `https://min-api.cryptocompare.com/data/histoday?fsym=${coin}&tsym=${fiat}&limit=2000`
@@ -42,8 +45,16 @@ module.exports = function (context, req) {
         return obj
       })
       .filter(e => e[fiats[0]] > 0) // filter elements where currency does not report valid price
-      context.bindings.tableBinding = context.bindings.tableBinding.concat(entries)
-      return entries
+
+      return Promise.all(entries.map(entry => {
+        return new Promise((resolve, reject) => tableService.insertEntity(TABLENAME, entry, function (error, result, response) {
+          if (error) {
+            context.log(error)
+            reject(error)
+          }
+          resolve(result)
+        }))
+      }))
     })
   }))
   .then(() => context.done())
