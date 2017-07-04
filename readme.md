@@ -6,7 +6,7 @@
 
 ### collecting prices
 
-Prices for various crypto currencies are collected every minute via azure functions and stored in cosmos DB.
+Prices for various crypto currencies are collected every ~~minute~~ 5 minutes via azure functions and cached.
 
 * [x] Playground function and table storage
 * [x] Deploy functions via github/infra-as-code
@@ -14,25 +14,25 @@ Prices for various crypto currencies are collected every minute via azure functi
 * [x] figure out how to add old data
     * maybe revise aggregates depending on availabily of historic data
     * ➡️ use day [day history API](https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=1000), see [spec](https://www.cryptocompare.com/api/#-api-data-histoday-), needs one query per `coin/currency` pair but should be executable within rate limits as it allows 2000 days at once
+    * ➡️ uses closing price
 
 ### aggregating prices
 
 Build aggregates of the full price history for use in the web UI.
 
-* [ ] add aggregation function to generate `10min`, `30min`, `1hr`, `12hr`, `1d`, `10d` summaries
-* [ ] define when aggregates should be built
-    * build all after update / collecting
-    * individual CRON jobs
-    * single independent CRON job with divisor
+* ~~[ ] add aggregation function to generate `10min`, `30min`, `1hr`, `12hr`, `1d`, `10d` summaries~~
+* ~~[ ] define when aggregates should be built~~
+    * ~~build all after update / collecting~~
+    * ~~individual CRON jobs~~
+    * ~~single independent CRON job with divisor~~
+* ➡️ try to build on the fly
 
 ### web API - prices
 
-Provide API endpoints that give the aggregated metrics for various coins
+Provide API endpoints that give the aggregated metrics for various coins. Implemented with graphQL ([#7](https://github.com/anoff/cryptobooks/issues/7))
 
 * [ ] authorization
 * [ ] caching
-* [ ] `GET` aggregates
-* [ ] `GET` explicit day rating
 
 ### web API - assets (books)
 
@@ -41,7 +41,7 @@ Store encrypted `JSON` blob of assets in a database.
 * Authentication via `username` and a `password hash`
 * Client side decryption of the blob with the actual unhashed password (password never leaves client)
 
-* [ ] RESTful `PUT`, `POST`, `GET`, `DELETE` API design
+* [x] RESTful `PUT`, `POST`, `GET`, `DELETE` API design
 
 ### web UI
 
