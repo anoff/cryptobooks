@@ -1,15 +1,25 @@
 #!/usr/bin/env node
+const path = require('path')
 const request = require('request-promise')
 const azure = require('azure-storage')
 const TABLENAME = 'prices'
 
-const fiats = ['EUR', 'BTC', 'USD']
-const coins = ['BTC', 'ETH', 'SC', 'LTC', 'ETC', 'XMR', 'XRP']
+if (process.argv.length < 6) {
+  console.log('🔥 arguments missing')
+  console.log(`💁‍ usage: ${path.basename(process.argv[1])} <coins> <fiats> <count> <hours/days>`)
+  console.log(`💁‍ example: ${path.basename(process.argv[1])} BTC,ETH EUR,USD 20 hours, to get pairs of BTC:EUR, BTC:USD, ETH:EUR, ETH:USD for the last 20 hours`)
+  process.exit()
+}
+
+const coins = process.argv[2].split(',')
+const fiats = process.argv[3].split(',')
+const limit = Math.min(parseInt(process.argv[4]), 2000)
+const api = process.argv[5].toLocaleLowerCase() === 'hours' ? 'histohour' : 'histoday'
 
 const tableService = azure.createTableService()
 Promise.all(coins.map(coin => {
   return Promise.all(fiats.map(fiat => {
-    const url = `https://min-api.cryptocompare.com/data/histoday?fsym=${coin}&tsym=${fiat}&limit=2000`
+    const url = `https://min-api.cryptocompare.com/data/${api}?fsym=${coin}&tsym=${fiat}&limit=${limit}`
     return request(url)
     .then(res => {
       res = JSON.parse(res)
@@ -32,8 +42,12 @@ Promise.all(coins.map(coin => {
       const obj = {
         PartitionKey: {_: e.coin, $: 'Edm.String'},
         RowKey: {_: e.date.toISOString(), $: 'Edm.String'},
-        timeRecorded: e.date,
-        historic: true
+        timeRecorded: e.date
+      }
+      if (api === 'histohour') {
+        obj.hourly = true
+      } else if (api === 'histoday') {
+        obj.daily = true
       }
       obj[e.fiat] = e.price
       // append other exchange rates here
