@@ -48,6 +48,7 @@ Promise.all(coins.map(coin => {
         obj.hourly = true
       } else if (api === 'histoday') {
         obj.daily = true
+        obj.hourly = true // daily is also an hourly entry because it upserts
       }
       obj[e.fiat] = e.price
       // append other exchange rates here
@@ -78,7 +79,7 @@ Promise.all(coins.map(coin => {
     if (ix === 0 || tableBatches[0].size() === 100 || entry.PartitionKey._ !== last.PartitionKey._) {
       tableBatches.unshift(new azure.TableBatch())
     }
-    tableBatches[0].insertEntity(entry)
+    tableBatches[0].insertOrReplaceEntity(entry)
     last = entry
   })
   return tableBatches
