@@ -1,0 +1,18 @@
+{
+  "bindings": [
+    {
+      "name": "timer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "0 0 * * * *"
+    },
+    {
+      "type": "table",
+      "name": "tableBinding",
+      "tableName": "prices",
+      "connection": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}
