@@ -1,0 +1,22 @@
+{
+  "name": "cryptobooks-coinrates",
+  "version": "0.0.1",
+  "description": "return rates as graphQL endpoint",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anoff/cryptobooks.git"
+  },
+  "author": "Andreas Offenhaeuser <http://anoff.io>",
+  "license": "GPL-3.0",
+  "private": true,
+  "homepage": "https://github.com/anoff/cryptobooks#readme",
+  "dependencies": {
+    "azure-storage": "^2.2.0",
+    "graphql": "^0.10.3",
+    "graphql-iso-date": "^3.2.0"
+  }
+}
