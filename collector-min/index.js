@@ -8,7 +8,7 @@ module.exports = function (context, timer) {
   const url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,SC,LTC,ETC,XMR,XRP&tsyms=BTC,EUR,USD'
   const tableService = azure.createTableService(process.env.AzureWebJobsStorage)
 
-  function addEntry(entry) {
+  function addEntry (entry) {
     return tableService.insertEntity(TABLENAME, entry, function (error, result, response) {
       if (error) {
         context.log(error)
@@ -28,7 +28,7 @@ module.exports = function (context, timer) {
           entry[curr] = data[coin][curr]
         })
         // add additional entry if hour is passed
-        if (timestamp.getMinutes() * 60 + timestamp.getSeconds() <= INTERVAL) {
+        if (timestamp.getMinutes() * 60 + timestamp.getSeconds() + timestamp.getMilliseconds() / 1000 <= INTERVAL) {
           entry.hourly = true
           // add another entry every day
           if (timestamp.getHours() === 0) {
